@@ -4,7 +4,7 @@
 # Вопросы для собеседования на Java Developer
 
 + [ООП](#ООП) ![icon][done]
-+ [JVM](#jvm) ![icon][done]
++ [JVM and Garbage Collectors](#jvm) ![icon][done]
 + [Java Core](#java-core) ![icon][done]
 + [Java Collections Framework](#java-collections) ![icon][done]
 + [Java 8](#java-8) ![icon][done]
@@ -43,7 +43,7 @@
 
 [к оглавлению](#Вопросы-для-собеседования-на-java-developer)
 
-## JVM
+## JVM and Garbage Collectors
 + [За что отвечает JVM](jvm.md#За-что-отвечает-JVM)
 + [Classloader](jvm.md#Classloader)
 + [Области данных времени выполнения](jvm.md#Области-данных-времени-выполнения)
