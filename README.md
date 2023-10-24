@@ -3,15 +3,22 @@
 
 # Backend RoadMap (Java)
 
-+ [OS and general knowledge](osandgeneralknowledge.md) ![icon][done]
-+ [Internet](internet.md) ![icon][done]
-+ [Programming language (Java)](java.md) ![icon][done]
-+ [ООП](#ООП) ![icon][done]
-+ [JVM and Garbage Collectors](#jvm-and-garbage-collectors) ![icon][done]
-+ [Java Core](#java-core) ![icon][done]
-+ [Java Collections Framework](#java-collections) ![icon][done]
-+ [Java 8](#java-8) ![icon][done]
-+ [Потоки ввода-вывода в Java](#Потоки-вводавывода-в-java) ![icon][done]
++ [Базовая Computer Science](osandgeneralknowledge.md) ![icon][done]
++ [Интернет](internet.md) ![icon][done]
++ [Система контроля версий (Git)](git.md) ![icon][done]
++ [Язык программирования (Java)](java/javamenu.md) ![icon][done]
++ [Базы данных](databases.md) ![icon][done]
++ [HTTP & API](httpandapi.md) ![icon][done]
++ [Тестирование](httpandapi.md) ![icon][done]
++ [Кэширование и Логгирование](databases.md) ![icon][done]
++ [WebSockets & Message Brokers](httpandapi.md) ![icon][done]
++ [Search Engines & GraphQL](httpandapi.md) ![icon][done]
++ [Web security](httpandapi.md) ![icon][done]
++ [Web servers](httpandapi.md) ![icon][done]
++ [Containerization](httpandapi.md) ![icon][done]
++ [CI/CD](httpandapi.md) ![icon][done]
++ [Software Design and Architecture](httpandapi.md) ![icon][done]
+
 + [Сериализация](#Сериализация) ![icon][done]
 + [Многопоточность](#Многопоточность) ![icon][done]
 + [Servlets, JSP, JSTL](#servlets-jsp-jstl) ![icon][done]
@@ -29,22 +36,6 @@
 + [Дополнительные материалы](#Дополнительные-материалы) ![icon][done]
 
 [done]:done.png
-
-## ООП
-+ [Что такое _ООП_?](oop.md#Что-такое-ООП)
-+ [Назовите основные принципы _ООП_.](oop.md#Назовите-основные-принципы-ООП)
-+ [Что такое _«инкапсуляция»_?](oop.md#Что-такое-инкапсуляция)
-+ [Что такое _«наследование»_?](oop.md#Что-такое-наследование)
-+ [Что такое _«полиморфизм»_?](oop.md#Что-такое-полиморфизм)
-+ [Что такое _«абстракция»_?](oop.md#Что-такое-абстракция)
-+ [Что представляет собой _«обмен сообщениями»_?](oop.md#Что-представляет-собой-обмен-сообщениями)
-+ [Расскажите про основные понятия ООП: _«класс»_, _«объект»_, _«интерфейс»_.](oop.md#Расскажите-про-основные-понятия-ООП-класс-объект-интерфейс)
-+ [В чем заключаются преимущества и недостатки объектно-ориентированного подхода в программировании?](oop.md#В-чем-заключаются-преимущества-и-недостатки-объектно-ориентированного-подхода-в-программировании)
-+ [Что подразумевают в плане принципов ООП выражения _«является»_ и _«имеет»_?](oop.md#Что-подразумевают-в-плане-принципов-ООП-выражения-является-и-имеет)
-+ [В чем разница между _композицией_ и _агрегацией_?](oop.md#В-чем-разница-между-композицией-и-агрегацией)
-+ [Что такое _статическое_ и _динамическое связывание_?](oop.md#Что-такое-статическое-и-динамическое-связывание)
-
-[к оглавлению](#backend-roadmap-java)
 
 ## JVM and Garbage Collectors
 + [За что отвечает JVM](jvm.md#За-что-отвечает-jvm)
