@@ -1,6 +1,6 @@
 ## JVM
-+ [За что отвечает JVM](jvm.md#За-что-отвечает-JVM)
-+ [Classloader](jvm.md#Classloader)
++ [За что отвечает JVM](#За-что-отвечает-jvm)
++ [Classloader](jvm.md#сlassloader)
 + [Области данных времени выполнения](jvm.md#Области-данных-времени-выполнения)
 + [Frames](jvm.md#Frames)
 + [Execution Engine](jvm.md#Execution-Engine)
