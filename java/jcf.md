@@ -1,4 +1,4 @@
-[Вопросы для собеседования](README.md)
+[Назад](javamenu.md)
 
 # Java Collections Framework
 + [Что такое _«коллекция»_?](#Что-такое-коллекция)
@@ -1080,4 +1080,4 @@ for (Map.Entry<K, V> entry : set) {
 + [JavaRush](http://info.javarush.ru/)
 + [Хабрахабр:Справочник по Java Collections Framework](https://habrahabr.ru/post/237043/)
 
-[Вопросы для собеседования](README.md)
+[Главное меню](../README.md)

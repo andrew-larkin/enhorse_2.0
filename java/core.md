@@ -1,4 +1,4 @@
-[Вопросы для собеседования](README.md)
+[Назад](javamenu.md)
 
 # Java Core
 + [Чем различаются JRE, JVM и JDK?](#Чем-различаются-jre-jvm-и-jdk)
@@ -1548,4 +1548,4 @@ __Локализация (localization)__ -  адаптация интерфей
 + [Объектно-ориентированное программирование](http://oop-java.blogspot.ru/2006/02/blog-post_21.html)
 + [JavaRush](http://info.javarush.ru/)
 
-[Вопросы для собеседования](README.md)
+[Главное меню](../README.md)
