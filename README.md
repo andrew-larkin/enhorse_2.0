@@ -4,20 +4,20 @@ Enhorse 2.0 расширяет оригинальный github-репозито�
 
 # Backend RoadMap (Java)
 
-+ [Базовая Computer Science](computer_science/osandgeneralknowledge.md) ![icon][done]
++ [Базовая Computer Science](computer_science/csmenu.md) ![icon][done]
 + [Система контроля версий (Git)](git/git.md) ![icon][done]
 + [Язык программирования (Java)](java/javamenu.md) ![icon][done]
 + [Базы данных](databases/dbmenu.md) ![icon][done]
-+ [HTTP & API](httpandapi.md) ![icon][done]
-+ [Тестирование](httpandapi.md) ![icon][done]
-+ [Кэширование и Логгирование](databases/databases.md) ![icon][done]
-+ [WebSockets & Message Brokers](httpandapi.md) ![icon][done]
-+ [Search Engines](httpandapi.md) ![icon][done]
-+ [Web security](httpandapi.md) ![icon][done]
-+ [Web servers](httpandapi.md) ![icon][done]
-+ [Containerization](httpandapi.md) ![icon][done]
-+ [CI/CD](httpandapi.md) ![icon][done]
-+ [Software Design and Architecture](httpandapi.md) ![icon][done]
++ [HTTP & API](empty.md) ![icon][done]
++ [Тестирование](test/test.md) ![icon][done]
++ [Кэширование и Логгирование](cache_log/cacheandlog.md) ![icon][done]
++ [WebSockets & Message Brokers](empty.md) ![icon][done]
++ [Search Engines](empty.md) ![icon][done]
++ [Web security](empty.md) ![icon][done]
++ [Web servers](empty.md) ![icon][done]
++ [Containerization](empty.md) ![icon][done]
++ [CI/CD](empty.md) ![icon][done]
++ [Software Design and Architecture](empty.md) ![icon][done]
 
 [done]:done.png
 
