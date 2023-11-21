@@ -155,6 +155,7 @@ Reference coloring  (цветные указатели) — это основн�
 ```
 <img src="/images/heap_space.jpg">
 
+<img src="/images/heap_comp.jpg">
 [к оглавлению](#jvm)
 
 ## Classloader
