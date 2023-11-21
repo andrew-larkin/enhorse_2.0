@@ -153,7 +153,7 @@ Reference coloring  (цветные указатели) — это основн�
 ```code
 -XX:+UseZGC
 ```
-<img src="images/heap_space.jpg">
+<img src="/images/heap_space.jpg">
 
 [к оглавлению](#jvm)
 
