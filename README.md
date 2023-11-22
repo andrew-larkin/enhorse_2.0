@@ -17,7 +17,7 @@ Enhorse 2.0 расширяет оригинальный github-репозито�
 + [Web servers](empty.md) ![icon][done]
 + [Containerization](empty.md) ![icon][done]
 + [CI/CD](empty.md) ![icon][done]
-+ [Software Design and Architecture](empty.md) ![icon][done]
++ [Software Design and Architecture](design/designmenu.md) ![icon][done]
 
 [done]:done.png
 
