@@ -1,3 +1,5 @@
+[Назад](javamenu.md)
+
 ## JVM
 + [За что отвечает JVM](#За-что-отвечает-jvm)
 + [Garbage Collectors](#Garbage-collectors)
@@ -465,4 +467,4 @@ JIT-компилятор устраняет недостатки интерпр�
 - https://www.developer.com/java/data/understanding-the-jvm-architecture.html
 - https://dzone.com/articles/understanding-jvm-internals
 
-[к оглавлению](#jvm)
+[Назад](javamenu.md)

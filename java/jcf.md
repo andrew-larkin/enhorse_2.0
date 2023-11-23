@@ -1080,4 +1080,4 @@ for (Map.Entry<K, V> entry : set) {
 + [JavaRush](http://info.javarush.ru/)
 + [Хабрахабр:Справочник по Java Collections Framework](https://habrahabr.ru/post/237043/)
 
-[Главное меню](../README.md)
+[Назад](javamenu.md)

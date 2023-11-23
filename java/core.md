@@ -1548,4 +1548,4 @@ __Локализация (localization)__ -  адаптация интерфей
 + [Объектно-ориентированное программирование](http://oop-java.blogspot.ru/2006/02/blog-post_21.html)
 + [JavaRush](http://info.javarush.ru/)
 
-[Главное меню](../README.md)
+[Назад](javamenu.md)

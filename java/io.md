@@ -300,4 +300,4 @@ __Символьная (символическая) ссылка__ (также �
 + [javastudy.ru](http://javastudy.ru/interview/input-output/)
 + [Bruce Eckel «Thinking in Java»](http://iais.kemsu.ru/odocs/java/Chapter11.html)
 
-[Главное меню](../README.md)
+[Назад](javamenu.md)
