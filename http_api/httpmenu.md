@@ -1,6 +1,6 @@
 [Главное меню](../README.md)
 
-# Java
+# HTTP & API
 
 + [HTTP](http.md) ![icon][done]
 + [REST API](rest.md) ![icon][done]
