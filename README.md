@@ -11,7 +11,7 @@ Enhorse 2.0 расширяет оригинальный github-репозито�
 + [HTTP & API](http_api/httpmenu.md) ![icon][done]
 + [Тестирование](test/test.md) ![icon][done]
 + [Кэширование и Логгирование](cache_log/cacheandlog.md) ![icon][done]
-+ [WebSockets & Message Brokers](empty.md) ![icon][done]
++ [WebSockets & Message Brokers](websocket_messagebrokers/brokersmenu.md) ![icon][done]
 + [Search Engines](empty.md) ![icon][done]
 + [Web security](empty.md) ![icon][done]
 + [Web servers](empty.md) ![icon][done]

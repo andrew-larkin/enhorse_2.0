@@ -1,4 +1,4 @@
-[Вопросы для собеседования](README.md)
+[Назад](dbmenu.md)
 
 # JDBC
 + [Что такое _JDBC_?](#Что-такое-jdbc)
@@ -7,7 +7,7 @@
 + [Из каких частей стоит JDBC?](#Из-каких-частей-стоит-jdbc)
 + [Перечислите-основные-классы-и-интерфейсы-jdbc](#Перечислите-основные-классы-и-интерфейсы-jdbc)
 + [Опишите основные этапы работы с базой данных с использованием JDBC.](#Опишите-основные-этапы-работы-с-базой-данных-при-использовании-jdbc)
-+ [Перечислите основные типы данных используемые в JDBC. Как они связаны с типами Java?](#Перечислите-основные-типы-данных-используемые-в-JDBC.-Как-они-связаны-с-типами-Java)
++ [Перечислите основные типы данных используемые в JDBC. Как они связаны с типами Java?](#перечислите-основные-типы-данных-используемые-в-jdbc-как-они-связаны-с-типами-java)
 + [Как зарегистрировать драйвер JDBC?](#Как-зарегистрировать-драйвер-jdbc)
 + [Как установить соединение с базой данных?](#Как-установить-соединение-с-базой-данных)
 + [Какие уровни изоляции транзакций поддерживаются в JDBC?](#Какие-уровни-изоляции-транзакций-поддерживаются-в-jdbc)
@@ -134,17 +134,24 @@ JDBC превращает вызовы уровня API в «родные» ко
 
 + URL базы данных
 ```java
-static Connection getConnection(String url)
+class Main {
+    static Connection getConnection(String url);
+}
+
 ```
 
 + URL базы данных и набор свойств для инициализации
 ```java
-static Connection getConnection(String url, Properties info)
+class Main {
+    static Connection getConnection(String url, Properties info);
+}
 ```
 
 + URL базы данных, имя пользователя и пароль
 ```java
-static Connection getConnection(String url, String user, String password)
+class Main {
+    static Connection getConnection(String url, String user, String password);
+}
 ```
  
 В результате вызова будет установлено соединение с базой данных и создан объект класса `java.sql.Connection` - своеобразная «сессия», внутри контекста которой и будет происходить дальнейшая работа с базой данных.
@@ -239,31 +246,33 @@ __Хранимые процедуры__ – это именованный наб
 Пример вызова хранимой процедуры с входными и выходными параметрами:
 
 ```java
-public vois runStoredProcedure(final Connection connection) throws Exception {
-    // описываем хранимую процедуру
-    String procedure = "{ call procedureExample(?, ?, ?) }";
-    
-    // подготавливаем запрос
-    CallableStatement cs = connection.prepareCall(procedure);
-    
-    // устанавливаем входные параметры
-    cs.setString(1, "abcd");
-    cs.setBoolean(2, true);
-    cs.setInt(3, 10);
-    
-    // описываем выходные параметры
-    cs.registerOutParameter(1, java.sql.Types.VARCHAR);
-    cs.registerOutParameter(2, java.sql.Types.INTEGER);
-    
-    // запускаем выполнение хранимой процедуры
-    cs.execute();
-    
-    // получаем результаты
-    String parameter1 = cs.getString(1);
-    int parameter2 = cs.getInt(2);
-    
-    // заканчиваем работу с запросом
-    cs.close();
+class Main {
+    public void runStoredProcedure(final Connection connection) {
+        // описываем хранимую процедуру
+        String procedure = "{ call procedureExample(?, ?, ?) }";
+
+        // подготавливаем запрос
+        CallableStatement cs = connection.prepareCall(procedure);
+
+        // устанавливаем входные параметры
+        cs.setString(1, "abcd");
+        cs.setBoolean(2, true);
+        cs.setInt(3, 10);
+
+        // описываем выходные параметры
+        cs.registerOutParameter(1, java.sql.Types.VARCHAR);
+        cs.registerOutParameter(2, java.sql.Types.INTEGER);
+
+        // запускаем выполнение хранимой процедуры
+        cs.execute();
+
+        // получаем результаты
+        String parameter1 = cs.getString(1);
+        int parameter2 = cs.getInt(2);
+
+        // заканчиваем работу с запросом
+        cs.close();
+    }
 }
 ```
 
@@ -282,4 +291,4 @@ public vois runStoredProcedure(final Connection connection) throws Exception {
 + [Документация к пакету java.sql](https://docs.oracle.com/javase/7/docs/api/java/sql/package-summary.html)
 + [Википедия - Уровень изолированности транзакции](https://ru.wikipedia.org/wiki/Уровень_изолированности_транзакций)
 
-[Вопросы для собеседования](README.md)
+[Назад](dbmenu.md)
