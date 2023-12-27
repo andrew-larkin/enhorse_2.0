@@ -2,7 +2,7 @@
 
 # Distributed logging
 
-+ [ElasticSearch](../empty.md) ![icon][done]
++ [ElasticSearch](elastic.md) ![icon][done]
 + [Logstash](../empty.md) ![icon][done]
 + [Fluentd](../empty.md) ![icon][done]
 + [Kibana](../empty.md) ![icon][done]
