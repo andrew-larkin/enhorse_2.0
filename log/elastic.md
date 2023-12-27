@@ -220,7 +220,7 @@ Elasticsearch позволяет выполнять над документам�
 служит идентификатором индекса при индексировании, поиске, обновлении и удалении содержащихся в нем документов. Индекс 
 может иметь один или несколько shards и replicas.
 
-<img src="https://d3n0h9tb65y8q.cloudfront.net/public_assets/assets/000/003/135/original/index_in_ElasticSearch.png?1651747190" alt="d">
+<img src="https://d3n0h9tb65y8q.cloudfront.net/public_assets/assets/000/003/135/original/index_in_ElasticSearch.png?1651747190" alt="d" width="50%" height="50%">
 
 [к оглавлению](#Elastic-search)
 
