@@ -5,7 +5,7 @@
 
 1. [System Design concepts](computer_science/csmenu.md)
 2. [System Design interview flow](git/git.md)
-3. [Non-functional requirements](java/javamenu.md)
+3. [Non-functional requirements](non_func_req.md)
 4. [Scaling databases](databases/dbmenu.md)
 5. [Distributed transactions](http_api/httpmenu.md)
 6. [Common services for functional partitioning](test/test.md)
