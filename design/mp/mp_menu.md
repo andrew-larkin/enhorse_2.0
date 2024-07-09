@@ -12,14 +12,19 @@
    - #### [Self-contained Service (Автономный сервис)](#self-contained-service)
    - #### [Service per team (Сервис на команду)](#service-per-team)
    - #### [Strangler application](#strangler-application)
- ### Data patterns (Паттерны упрвления данными)
+
+ ### Data patterns (Паттерны управления данными)
    - ### Database architecture (Архитектура БД)
         - #### [Database per Service (Отдельная БД на каждый сервис)](#Database-per-Service )
    - ### Maintaining data consistency (Управление констистентностью данных)
    - ### Querying (Запросы)
+
  ### Testing (Тестирование)
+
  ### UI (Графический интерфейс)
+
  ### Observability (Наблюдаемость)
+
 
 
 ## Application Infrastructure patterns (Паттерны инфраструктуры приложения)
