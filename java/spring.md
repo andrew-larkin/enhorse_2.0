@@ -63,8 +63,7 @@
 ```java
 public class HelloWorldSpringAnnotated {
     public static void main(String... args) {
-        ApplicationContext ctx = new AnnotationConfigApplicationContext(HelloWorldConfigura
-                tion.class);
+        ApplicationContext ctx = new AnnotationConfigApplicationContext(HelloWorldConfiguration.class);
         MessageRenderer mr = ctx.getBean("renderer", MessageRenderer.class);
         mr.render();
     }
@@ -657,10 +656,18 @@ Model — интерфейс, ModelMap его реализация. ModelAndView
 ## В чем разница между `model.put()` и `model.addAttribute()`?
 
 Метод addAttribute отделяет нас от работы с базовой структурой hashmap. По сути addAttribute это обертка над put, где делается дополнительная проверка на null. Метод addAttribute в отличие от put возвращает modelmap.
+```java
 
-````java
-model.addAttribute(“attribute1”,”value1”).addAttribute(“attribute2”,”value2”);
-````
+public class Controller {
+
+    @PostMapping()
+    public Model get() {
+        Model model = new Model();
+        model.addAttribute(attribute1,value1).addAttribute(attribute2,value2);
+        return model; 
+    }
+}
+```
 
 [к оглавлению](#spring)
 
