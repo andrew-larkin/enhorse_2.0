@@ -20,12 +20,14 @@
 + [Тестирование Spring приложений?](#Тестирование-Spring-приложений)
 
 ### Spring MVC
-+ [Где должны располагаться статические (css, js, html) ресурсы в Spring MVC приложении?](#где-должны-располагаться-статические-css-js-html-ресурсы-в-spring-mvc-приложении)
-+ [Можно ли передать в запросе один и тот же параметр несколько раз?](#можно-ли-передать-в-запросе-один-и-тот-же-параметр-несколько-раз)
-+ [В чем разница между `ModelMap` и `ModelAndView`?](#в-чем-разница-между-modelmap-и-modelandview)
-+ [В чем разница между `model.put()` и `model.addAttribute()`?](#в-чем-разница-между-modelput-и-modeladdattribute)
-+ [Что можете рассказать про Form Binding?](#что-можете-рассказать-про-form-binding)
++ [Что такое `MVC`?](#Что-такое-MVC)
++ [Что такое `Spring MVC`?](#Что-такое-Spring-MVC)
++ [Жизненный цикл Spring MVC Request?](#Жизненный-цикл-Spring-MVC-Request)
 + [В чем разница между Filters, Listeners and Interceptors?](#в-чем-разница-между-filters-listeners-and-interceptors)
++ [Разница между @Controller и @RestController?](#Разница-между-Controller-и-RestController)
++ [Аннотации для маппинга запросов?](#Аннотации-для-маппинга-запросов)
++ [Как получить параметры запроса?](#Как-получить-параметры-запроса)
+
 
 ### Spring AOP
 + [В чем разница между Сквозной Функциональностью (Cross Cutting Concerns) и АОП (аспектно ориентированное программирование)?](#в-чем-разница-между-сквозной-функциональностью-cross-cutting-concerns-и-аоп-аспектно-ориентированное-программирование)
@@ -601,10 +603,261 @@ public interface BeanPostProcessor {
 
 [к оглавлению](#spring)
 
+## Что такое `MVC`?
+MVC — это широко используемый шаблон проектирования для реализации уровня представления приложения. Главный принцип шаблона MVC заключается в определении архитектуры с четко определенными обязанностями для различных компонентов.
+
+3 компонента:
+- Model: Модель представляет собой бизнес-данные, а также «состояние» приложения в контексте пользователя. Например, 
+на сайте электронной коммерции модель обычно включает информацию профиля пользователя, данные корзины покупок и данные заказа, 
+если пользователи приобретают товары на сайте.
+- View: позволяет отображать данные пользователю в нужном формате, поддерживает взаимодействие с пользователями, 
+а также обеспечивает проверку данных на стороне клиента, интернационализацию, стили и так далее.
+- Controller: Контроллер обрабатывает запросы на действия, выполняемые пользователями на стороне клиента, 
+взаимодействуя со слоем сервисов, обновляя модель и направляя пользователей к соответствующему представлению в зависимости от 
+результата выполнения.
+
+<img src="img_spring_mvc.png" alt="mvc">
+
+Обычная обработка запроса представления происходит следующим образом:
+1. Request: Запрос отправляется на сервер. На стороне сервера большинство
+   фреймворков (например, Spring MVC или Struts) имеют диспетчер (в виде
+   сервлета) для обработки запроса.
+2. Invokes: Диспетчер направляет запрос соответствующему контроллеру
+   на основе информации из HTTP-запроса и конфигурации веб-приложения.
+3. Service call: Контроллер взаимодействует с сервисным слоем.
+4. Model is populated: Информация, полученная от сервисного слоя, используется
+   контроллером для заполнения модели.
+5. View is created: На основе модели создается представление.
+6. Response: Контроллер возвращает соответствующее представление пользователю.
+
+[к оглавлению](#spring-mvc)
+
+## Что такое `Spring MVC`?
+Модуль Spring MVC предоставляет надежную инфраструктуру и архитектуру Model View Controller (MVC) для разработки веб-приложений.
+Spring MVC состоит из нескольких ключевых компонентов:
+- DispatcherServlet — главный контроллер (Front Controller), через который проходят все запросы.
+- Controller — классы с @Controller, обрабатывающие запросы и возвращающие модель+представление.
+- HandlerMapping — определяет, какой контроллер должен обработать запрос.
+- ViewResolver — отвечает за поиск и рендеринг представления (JSP, Thymeleaf и др.).
+- ModelAndView / Model — контейнер для данных, передаваемых в представление.
+- View — итоговый шаблон (страница), который видит пользователь.
+
+Стандартная работа: DispatcherServlet → Controller → Model → ViewResolver → View.
+
+В Spring MVC DispatcherServlet — это центральный сервлет, который принимает запросы и распределяет их между соответствующими 
+контроллерами. В приложении Spring MVC может быть любое количество экземпляров DispatcherServlet для различных целей (например, 
+для обработки запросов пользовательского интерфейса и запросов RESTful-WS), и каждый экземпляр DispatcherServlet имеет свою 
+собственную конфигурацию WebApplicationContext, которая определяет характеристики на уровне сервлета, такие как контроллеры, 
+поддерживающие сервлет, сопоставление обработчиков, разрешение представлений, интернационализация, тематическое оформление, 
+валидация, а также преобразование типов и форматирование.
+
+Под конфигурациями WebApplicationContext на уровне сервлетов Spring MVC поддерживает корневой WebApplicationContext, который 
+включает в себя конфигурации на уровне приложения, такие как источник данных бэкэнда, безопасность, а также конфигурацию уровня 
+сервисов и персистентности. Корневой WebApplicationContext будет доступен для всех WebApplicationContext на уровне сервлетов.
+Рассмотрим пример. Допустим, у нас есть два экземпляра DispatcherServlet в приложении. 
+
+Один сервлет поддерживает пользовательский интерфейс (называемый сервлетом приложения), а другой предоставляет сервисы в 
+форме RESTful-WS другим приложениям (называемый RESTful сервлетом). В Spring MVC мы определим конфигурации как для корневого 
+экземпляра WebApplicationContext, так и для экземпляра WebApplicationContext для двух экземпляров DispatcherServlet. 
+
+
+[к оглавлению](#spring-mvc)
+
+
+## Жизненный цикл Spring MVC Request
+
+<img src="img_request_lifecycle.png" alt="Жизненный цикл Spring MVC Request">
+
+Основные компоненты и их назначение следующие:
+1. Filter: Фильтр применяется к каждому запросу.
+2. DispatcherServlet: Сервлет анализирует запросы и направляет их соответствующему контроллеру для обработки.
+3. Common services: Общие сервисы применяются к каждому запросу для обеспечения поддержки, включая интернационализацию (i18n), 
+темы оформления и загрузку файлов. Их конфигурация определяется в WebApplicationContext DispatcherServlet.
+4. Handler Mapping: Сопоставляет входящие запросы с обработчиками (метод в классе контроллера Spring MVC). 
+Spring MVC автоматически регистрирует 
+реализацию HandlerMapping, которая сопоставляет обработчики на основе HTTP-путей, выраженных с помощью аннотации @RequestMapping 
+(и ее расширений) на уровне типа или метода в классах контроллеров.
+5. Handler Interceptor: В Spring MVC можно зарегистрировать перехватчики для обработчиков, чтобы реализовать общие проверки или логику. 
+Например, перехватчик обработчиков может проверять, можно ли вызывать обработчики только в рабочее время или ночью.
+6. HandlerExceptionResolver: В Spring MVC интерфейс HandlerExceptionResolver (определенный в пакете org.springframework.web.servlet) 
+предназначен для обработки неожиданных исключений, возникающих во время обработки запросов обработчиками. По умолчанию 
+DispatcherServlet регистрирует класс DefaultHandlerExceptionResolver (из пакета org.springframework.web.servlet.mvc.support). 
+Этот резолвер обрабатывает определенные стандартные исключения Spring MVC, устанавливая конкретный код состояния ответа. 
+Также можно реализовать свой собственный обработчик исключений, аннотировав метод контроллера аннотацией @ExceptionHandler и 
+передав тип исключения в качестве атрибута.
+7. ViewResolver: Интерфейс ViewResolver из Spring MVC (из пакета org.springframework.web.servlet) поддерживает разрешение 
+представлений на основе логического имени, возвращаемого контроллером. Существует множество классов реализации для поддержки 
+различных механизмов разрешения представлений. Например, класс UrlBasedViewResolver поддерживает прямое разрешение логических 
+имен в URL-адреса. Класс ContentNegotiatingViewResolver поддерживает динамическое разрешение представлений в зависимости от типа 
+носителя, поддерживаемого клиентом (например, XML, PDF и JSON). Также существует ряд реализаций для интеграции с различными 
+технологиями представления, такими как Thymeleaf5 (ThymeleafViewResolver), FreeMarker6 (FreeMarkerViewResolver), 
+Velocity7 (VelocityViewResolver) и JasperReports8 (JasperReportsViewResolver).
+
+[к оглавлению](#spring-mvc)
+
+
+## В чем разница между Filters, Listeners and Interceptors?
+
+#### Filters (Фильтры)
+- Уровень: Servlet API (стандарт Java EE, не специфичен для Spring)
+- Когда срабатывают: До и после того, как запрос достигнет DispatcherServlet
+- Область действия: Все запросы к приложению (не только к Spring MVC)
+
+Типичное использование:
+- Аутентификация/авторизация (например, JWT)
+- Логирование всех входящих запросов
+- Сжатие ответов
+- Установка кодировки (CharacterEncodingFilter)
+- CORS настройки
+
+Пример: OncePerRequestFilter, CharacterEncodingFilter
+
+#### Interceptors (Перехватчики)
+- Уровень: Spring MVC (специфичен для фреймворка)
+- Когда срабатывают: Внутри DispatcherServlet, между получением запроса и вызовом контроллера
+- Область действия: Только запросы, обрабатываемые Spring MVC (через DispatcherServlet)
+
+Типичное использование:
+- Логирование конкретных эндпоинтов
+- Добавление общих атрибутов в модель
+- Проверка прав доступа к конкретным контроллерам
+- Измерение времени выполнения контроллера
+
+Пример: HandlerInterceptor с методами preHandle(), postHandle(), afterCompletion()
+
+#### Listeners (Слушатели)
+- Уровень: Servlet API
+- Когда срабатывают: При событиях жизненного цикла (старт/стоп приложения, создание/уничтожение сессии, изменение атрибутов)
+- Область действия: Глобальные события сервлет-контейнера
+
+Типичное использование:
+- Инициализация ресурсов при старте приложения
+- Очистка при остановке
+- Отслеживание создания/удаления сессий (онлайн-пользователи)
+- Мониторинг изменений в контексте
+
+Пример: ServletContextListener, HttpSessionListener, ServletRequestListener
+
+Когда что использовать?
+- Filter — для низкоуровневой обработки, не зависящей от Spring контекста
+- Interceptor — для логики, которая зависит от Spring MVC (доступ к контроллерам, моделям)
+- Listener — для глобальных событий жизненного цикла (инициализация, сессии)
+
+
+[к оглавлению](#spring-mvc)
+
+
+## Разница между @Controller и @RestController
+Кратко: @RestController = @Controller + @ResponseBody
+
+
+| Характеристика | @Controller | @RestController |
+| ------------------- |-------------------------------------------------------|-----------------|
+| Назначение | Для классических веб-приложений с View (JSP, Thymeleaf)  | Объект, который автоматически → JSON/XML                |
+| Возвращаемое значение | Имя view (шаблона) или ModelAndView | Объект, который автоматически → JSON/XML |
+| Нужен ли @ResponseBody | Да (если не хотим view) | Нет (включен по умолчанию для всех методов) |
+| Использование | Сайты с HTML-страницами | Микросервисы, SPA (React/Vue + бэкенд) |
 
 
 
+[к оглавлению](#spring-mvc)
 
+
+## Аннотации для маппинга запросов
+
+| Аннотация | Полный аналог | Для чего |
+| ------------------- |------------------------------------------------------|-----------------|
+| @RequestMapping | —  | Универсальная (метод + class level)                |
+| @GetMapping | @RequestMapping(method = GET) | Только GET |
+| @PostMapping | @RequestMapping(method = POST) | Только POST |
+| @PutMapping | @RequestMapping(method = PUT) | Только PUT |
+| @DeleteMapping | @RequestMapping(method = DELETE) | Только DELETE |
+| @PatchMapping | @RequestMapping(method = PATCH) | Частичное обновление |
+
+
+Дополнительные возможности:
+```java
+// Несколько URL на один метод
+@GetMapping({"/profile", "/me", "/account"})
+
+// Параметры и заголовки
+@GetMapping(value = "/data", params = "type=json", headers = "X-API-Version=1")
+
+// Produces/Consumes (Content Negotiation)
+@PostMapping(value = "/upload", consumes = "multipart/form-data")
+@GetMapping(value = "/report", produces = "application/pdf")
+```
+
+[к оглавлению](#spring-mvc)
+
+
+## Как получить параметры запроса
+
+| Аннотация | Откуда берет | Пример URL | Типичное использование |
+| ------------------- |---------------------|----------|------------------------|
+| @RequestParam | Query parameter или form data | /users?name=John   | Фильтры, пагинация     |
+| @PathVariable | Из пути URL | /users/123 | Идентификаторы |
+| @RequestBody | Тело запроса (JSON/XML) | POST с JSON | Создание/обновление |
+| @ModelAttribute | Form data + query params | Форма с полями | Сложные объекты из формы|
+
+Примеры:
+```java
+
+@RestController
+@RequestMapping("/api/products")
+public class ProductController {
+    
+    // 1. @RequestParam
+    // GET /api/products?category=electronics&page=2&size=10
+    @GetMapping
+    public List<Product> getProducts(
+        @RequestParam(required = false) String category,
+        @RequestParam(defaultValue = "1") int page,
+        @RequestParam(defaultValue = "20") int size
+    ) { return List.of(); }
+    
+    // 2. @PathVariable
+    // GET /api/products/42
+    @GetMapping("/{productId}")
+    public Product getById(@PathVariable Long productId) { //
+         }
+    
+    // Несколько path variables
+    // GET /api/categories/5/products/42
+    @GetMapping("/categories/{catId}/products/{prodId}")
+    public Product getProduct(
+        @PathVariable Long catId,
+        @PathVariable Long prodId
+    ) { 
+        //
+    }
+    
+    // 3. @RequestBody
+    // POST /api/products с JSON: {"name":"Laptop","price":999}
+    @PostMapping
+    public Product create(@RequestBody Product product) { 
+        //
+    }
+    
+    // 4. @ModelAttribute (собирает из query/form)
+    // GET /api/products/search?name=Phone&minPrice=100&maxPrice=500
+    @GetMapping("/search")
+    public List<Product> search(@ModelAttribute SearchCriteria criteria) { 
+        //
+    }
+}
+
+// Класс для @ModelAttribute
+public class SearchCriteria {
+    private String name;
+    private BigDecimal minPrice;
+    private BigDecimal maxPrice;
+    // геттеры/сеттеры
+}
+
+```
+
+[к оглавлению](#spring-mvc)
 
 ## В чем разница между Сквозной Функциональностью (Cross Cutting Concerns) и АОП (аспектно ориентированное программирование)?
 
@@ -635,82 +888,9 @@ public class Main {
 
 
 
-## В чем разница между Filters, Listeners and Interceptors?
-
-Концептуально всё просто, фильтры сервлетов могут перехватывать только HTTPServlets. Listeners могут перехватывать специфические события. Как перехватить события которые относятся ни к тем не другим?
-
-Фильтры и перехватчики делают по сути одно и тоже: они перехватывают какое-то событие, и делают что-то до или после.
-Java EE использует термин Filter, Spring называет их Interceptors. Именно здесь AOP используется в полную силу,
-благодаря чему возможно перехватывание вызовов любых объектов.
-
-[к оглавлению](#spring)
-
-## В чем разница между `ModelMap` и `ModelAndView`?
-
-Model — интерфейс, ModelMap его реализация. ModelAndView является контейнером для пары, как ModelMap и View. Обычно я
-люблю использовать ModelAndView. Однако есть так же способ когда мы задаем необходимые атрибуты в ModelMap, и возвращаем
-название View обычной строкой из метода контроллера.
-
-[к оглавлению](#spring)
-
-## В чем разница между `model.put()` и `model.addAttribute()`?
-
-Метод addAttribute отделяет нас от работы с базовой структурой hashmap. По сути addAttribute это обертка над put, где делается дополнительная проверка на null. Метод addAttribute в отличие от put возвращает modelmap.
-```java
-
-public class Controller {
-
-    @PostMapping()
-    public Model get() {
-        Model model = new Model();
-        model.addAttribute(attribute1,value1).addAttribute(attribute2,value2);
-        return model; 
-    }
-}
-```
-
-[к оглавлению](#spring)
-
-## Что можете рассказать про Form Binding?
-
-Нам это может понадобиться, если мы, например, захотим взять некоторое значение с HTML страницы и сохранить его в БД.
-Для этого нам надо это значение переместить в контроллер Spring. Если мы будем использовать Spring MVC form tags, Spring
-автоматически свяжет переменные на HTML странице с бином Spring.
-
-[к оглавлению](#spring)
-
-## Почему мы используем Hibernate Validator?
-
-Hibernate Validator никак не связан с БД. Это просто библиотека для валидации. Hibernate Validator версии 5.x является
-эталонной реализацией Bean Validation 1.1
-
-Так же если взглянуть по адресу <http://beanvalidation.org/2.0>, то Hibernate Validator является единственным, который
-сертифицирован.
-
-[к оглавлению](#spring)
-
-## Где должны располагаться статические (css, js, html) ресурсы в Spring MVC приложении?
-
-Расположение статических ресурсов можно настроить. В документации Spring Boot рекомендуется использовать /static, или
-/public, или /resources, или /META-INF/resources.
-
-[к оглавлению](#spring-mvc)
-
-## Можно ли передать в запросе один и тот же параметр несколько раз?
-
-Пример: `http://localhost:8080/login?name=Ranga&name=Ravi&name=Sathish`
-Да, можно принять все значения, используя массив в методе контроллера
-
-````java
-public String method(@RequestParam(value="name") String[] names){
-}
-````
-
-[к оглавлению](#spring)
-
 # Источники
 
 + [Википедия](https://ru.wikipedia.org/)
 + [Хабрахабр](https://habr.com/ru/post/222579/)
 
-[Вопросы для собеседования](README.md)
+[Вопросы для собеседования](/README.md)
